@@ -1,6 +1,6 @@
 # NoCameraSound
 
-iOS 15 - 16.1.2
+iOS 14 - 16.1.2
 
 Reboot your device to revert the changes.
 
