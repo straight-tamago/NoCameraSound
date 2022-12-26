@@ -20,8 +20,8 @@
 }
 
 - (IBAction)go:(id)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"すとれーとたまご★"
-                                                                   message:@"処理が完了するとこのアプリは落ちるけど、シャッター音は消えてるはずだよ。（いや知らんけど）"
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"操作を選択"
+                                                                   message:@"処理が完了するとこのアプリは落ちるけど、シャッター音は消えてるはずだよ。（一定時間経過or再起動で戻る）"
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     
@@ -62,7 +62,7 @@ UIAlertAction *fourthAction = [UIAlertAction actionWithTitle:@"やめる"
     NSURL *URL = [NSURL URLWithString:@"https://github.com/straight-tamago/NoCameraSound"];
     NSURL *URL2 = [NSURL URLWithString:@"https://github.com/zhuowei/MacDirtyCowDemo"];
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NoCameraSound 2.0"
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NoCameraSound 4.0"
                                                                    message:@"by すとれーとたまご★"
                                                             preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"Source Code"
