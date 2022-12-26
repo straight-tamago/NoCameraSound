@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  NoCameraSound
+
+  Created by mini on 2022/12/27.
+  
+*/
+
+"by straight-tamago" = "by すとれーとたまご★";
+"Close" = "閉じる";
+"Select Operation" = "操作を選択";
+"When the process is complete, this app will crash, but the shutter sound should be gone. (It will return to normal after a certain period of time or restart)" = "処理が完了するとこのアプリは落ちるけど、シャッター音は消えてるはずだよ。（一定時間経過or再起動で戻る）";
+"Photo & ScreenShot" = "写真撮影（スクショを含む）";
+"Video Recording (Start)" = "動画撮影開始（画面収録を含む）";
+"Video Recording (End)" = "動画撮影終了（画面収録を含む）";

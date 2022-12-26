@@ -20,33 +20,33 @@
 }
 
 - (IBAction)go:(id)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"操作を選択"
-                                                                   message:@"処理が完了するとこのアプリは落ちるけど、シャッター音は消えてるはずだよ。（一定時間経過or再起動で戻る）"
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Select Operation", nil)
+                                                                   message:NSLocalizedString(@"When the process is complete, this app will crash, but the shutter sound should be gone. (It will return to normal after a certain period of time or restart)", nil)
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     
-UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"写真撮影（スクショを含む）"
+UIAlertAction *firstAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Photo & ScreenShot", nil)
                                                       style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
     self->_running.hidden = false;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             startr_0();
     });
 }];
-UIAlertAction *secondAction = [UIAlertAction actionWithTitle:@"動画撮影開始（画面収録を含む）"
+UIAlertAction *secondAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Video Recording (Start)", nil)
                                                       style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
     self->_running.hidden = false;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             startr_1();
     });
 }];
-UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:@"動画撮影終了（画面収録を含む）"
+UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Video Recording (End)", nil)
                                                       style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
     self->_running.hidden = false;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             startr_2();
     });
 }];
-UIAlertAction *fourthAction = [UIAlertAction actionWithTitle:@"やめる"
+UIAlertAction *fourthAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Close", nil)
                                                           style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
     }];
     
@@ -58,12 +58,15 @@ UIAlertAction *fourthAction = [UIAlertAction actionWithTitle:@"やめる"
 }
 
 - (IBAction)info:(id)sender {
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *versionText = @"NoCameraSound v";
+    NSString *fullversion = [versionText stringByAppendingString:version];
     UIApplication *application = [UIApplication sharedApplication];
     NSURL *URL = [NSURL URLWithString:@"https://github.com/straight-tamago/NoCameraSound"];
     NSURL *URL2 = [NSURL URLWithString:@"https://github.com/zhuowei/MacDirtyCowDemo"];
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"NoCameraSound 4.0"
-                                                                   message:@"by すとれーとたまご★"
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:fullversion
+                                                                   message:NSLocalizedString(@"by straight-tamago", nil)
                                                             preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"Source Code"
                                                                style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
@@ -81,7 +84,7 @@ UIAlertAction *fourthAction = [UIAlertAction actionWithTitle:@"やめる"
                 }
             }];
         }];
-        UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:@"Close"
+        UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Close", nil)
               style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
         }];
     
