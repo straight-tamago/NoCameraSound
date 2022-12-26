@@ -18,15 +18,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3JV-RE-y9F">
-                                <rect key="frame" x="95.000000000000014" y="397" width="200.33333333333337" height="50.333333333333314"/>
+                                <rect key="frame" x="89.666666666666686" y="396.66666666666669" width="211" height="51"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="シャッター音 無効化" buttonSize="large"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Disable Shutter Sound" buttonSize="large"/>
                                 <connections>
                                     <action selector="go:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0n2-fJ-Ue0"/>
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="dtB-vp-Gi9">
-                                <rect key="frame" x="185" y="455" width="20" height="20"/>
+                                <rect key="frame" x="185" y="455.33333333333331" width="20" height="20"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjJ-np-Gq7">
                                 <rect key="frame" x="329" y="47" width="45" height="40"/>
@@ -41,7 +41,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NoCameraSound" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fr-iM-fEy">
-                                <rect key="frame" x="75.333333333333329" y="345" width="239.66666666666669" height="36"/>
+                                <rect key="frame" x="75.333333333333329" y="344.66666666666669" width="239.66666666666669" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

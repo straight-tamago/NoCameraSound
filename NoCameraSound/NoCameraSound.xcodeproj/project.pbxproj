@@ -15,6 +15,7 @@
 		3D369D742958FB5400A6E7C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D369D732958FB5400A6E7C4 /* main.m */; };
 		3D369D7F29590DFD00A6E7C4 /* poc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D369D7E29590DFD00A6E7C4 /* poc.m */; };
 		3D369D8E2959C83F00A6E7C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D369D8D2959C83F00A6E7C4 /* Assets.xcassets */; };
+		3D9B1A9D295A1C540025A0E0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B1A9F295A1C540025A0E0 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,9 @@
 		3D369D7D29590DF900A6E7C4 /* poc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = poc.h; sourceTree = "<group>"; };
 		3D369D7E29590DFD00A6E7C4 /* poc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = poc.m; sourceTree = "<group>"; };
 		3D369D8D2959C83F00A6E7C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../Downloads/AppIcons-3/Assets.xcassets"; sourceTree = "<group>"; };
+		3D9B1A99295A1C230025A0E0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		3D9B1A9A295A1C240025A0E0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		3D9B1A9E295A1C540025A0E0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 		3D369D602958FB5300A6E7C4 /* NoCameraSound */ = {
 			isa = PBXGroup;
 			children = (
+				3D9B1A9F295A1C540025A0E0 /* Localizable.strings */,
 				3D369D612958FB5300A6E7C4 /* AppDelegate.h */,
 				3D369D622958FB5300A6E7C4 /* AppDelegate.m */,
 				3D369D642958FB5300A6E7C4 /* SceneDelegate.h */,
@@ -122,6 +127,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 3D369D552958FB5300A6E7C4;
 			productRefGroup = 3D369D5F2958FB5300A6E7C4 /* Products */;
@@ -139,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D369D712958FB5400A6E7C4 /* LaunchScreen.storyboard in Resources */,
+				3D9B1A9D295A1C540025A0E0 /* Localizable.strings in Resources */,
 				3D369D8E2959C83F00A6E7C4 /* Assets.xcassets in Resources */,
 				3D369D6C2958FB5300A6E7C4 /* Main.storyboard in Resources */,
 			);
@@ -166,6 +173,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3D369D6B2958FB5300A6E7C4 /* Base */,
+				3D9B1A99295A1C230025A0E0 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -174,8 +182,17 @@
 			isa = PBXVariantGroup;
 			children = (
 				3D369D702958FB5400A6E7C4 /* Base */,
+				3D9B1A9A295A1C240025A0E0 /* ja */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3D9B1A9F295A1C540025A0E0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D9B1A9E295A1C540025A0E0 /* ja */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -313,7 +330,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0;
+				MARKETING_VERSION = 4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.straight-tamago.NoCameraSound";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -341,7 +358,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0;
+				MARKETING_VERSION = 4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.straight-tamago.NoCameraSound";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
