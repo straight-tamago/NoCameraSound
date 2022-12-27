@@ -1,0 +1,12 @@
+
+/* Class = "UIButton"; configuration.title = "Disable Shutter Sound"; ObjectID = "3JV-RE-y9F"; */
+"3JV-RE-y9F.configuration.title" = "Disable Shutter Sound";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "3JV-RE-y9F"; */
+"3JV-RE-y9F.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "NoCameraSound"; ObjectID = "5fr-iM-fEy"; */
+"5fr-iM-fEy.text" = "NoCameraSound";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "tjJ-np-Gq7"; */
+"tjJ-np-Gq7.normalTitle" = "Button";
