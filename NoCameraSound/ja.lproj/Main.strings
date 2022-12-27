@@ -1,0 +1,12 @@
+
+/* Class = "UIButton"; configuration.title = "シャッター音 無効化"; ObjectID = "3JV-RE-y9F"; */
+"3JV-RE-y9F.configuration.title" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "3JV-RE-y9F"; */
+"3JV-RE-y9F.normalTitle" = "シャッター音 無効化";
+
+/* Class = "UILabel"; text = "NoCameraSound"; ObjectID = "5fr-iM-fEy"; */
+"5fr-iM-fEy.text" = "NoCameraSound";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "tjJ-np-Gq7"; */
+"tjJ-np-Gq7.normalTitle" = "Button";
