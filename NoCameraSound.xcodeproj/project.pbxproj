@@ -9,22 +9,22 @@
 /* Begin PBXBuildFile section */
 		3D163908295B51D8006D31D8 /* NoCameraSoundApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D163907295B51D8006D31D8 /* NoCameraSoundApp.swift */; };
 		3D16390A295B51D8006D31D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D163909295B51D8006D31D8 /* ContentView.swift */; };
-		3D16390C295B51DB006D31D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D16390B295B51DB006D31D8 /* Assets.xcassets */; };
 		3D16390F295B51DB006D31D8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D16390E295B51DB006D31D8 /* Preview Assets.xcassets */; };
 		3D163918295B520E006D31D8 /* NoCameraSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D163917295B520E006D31D8 /* NoCameraSound.swift */; };
 		3D16391B295B5227006D31D8 /* vm_unaligned_copy_switch_race.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D16391A295B5227006D31D8 /* vm_unaligned_copy_switch_race.c */; };
+		3D163921295B58C8006D31D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D163920295B58C8006D31D8 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3D163904295B51D8006D31D8 /* NoCameraSound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoCameraSound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D163907295B51D8006D31D8 /* NoCameraSoundApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCameraSoundApp.swift; sourceTree = "<group>"; };
 		3D163909295B51D8006D31D8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		3D16390B295B51DB006D31D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D16390E295B51DB006D31D8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3D163917295B520E006D31D8 /* NoCameraSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCameraSound.swift; sourceTree = "<group>"; };
 		3D163919295B5227006D31D8 /* NoCameraSound-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NoCameraSound-Bridging-Header.h"; sourceTree = "<group>"; };
 		3D16391A295B5227006D31D8 /* vm_unaligned_copy_switch_race.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vm_unaligned_copy_switch_race.c; path = "../../../Downloads/WDBFontOverwrite-main/WDBFontOverwrite/vm_unaligned_copy_switch_race.c"; sourceTree = "<group>"; };
 		3D16391C295B522F006D31D8 /* vm_unaligned_copy_switch_race.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vm_unaligned_copy_switch_race.h; path = "../../../Downloads/WDBFontOverwrite-main/WDBFontOverwrite/vm_unaligned_copy_switch_race.h"; sourceTree = "<group>"; };
+		3D163920295B58C8006D31D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../Downloads/AppIcons-3/Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,10 +60,10 @@
 				3D163907295B51D8006D31D8 /* NoCameraSoundApp.swift */,
 				3D163909295B51D8006D31D8 /* ContentView.swift */,
 				3D163917295B520E006D31D8 /* NoCameraSound.swift */,
-				3D16390B295B51DB006D31D8 /* Assets.xcassets */,
 				3D16391A295B5227006D31D8 /* vm_unaligned_copy_switch_race.c */,
 				3D16391C295B522F006D31D8 /* vm_unaligned_copy_switch_race.h */,
 				3D163919295B5227006D31D8 /* NoCameraSound-Bridging-Header.h */,
+				3D163920295B58C8006D31D8 /* Assets.xcassets */,
 				3D16390D295B51DB006D31D8 /* Preview Content */,
 			);
 			path = NoCameraSound;
@@ -136,8 +136,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D163921295B58C8006D31D8 /* Assets.xcassets in Resources */,
 				3D16390F295B51DB006D31D8 /* Preview Assets.xcassets in Resources */,
-				3D16390C295B51DB006D31D8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
