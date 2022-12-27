@@ -25,6 +25,7 @@
 		3D16391A295B5227006D31D8 /* vm_unaligned_copy_switch_race.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vm_unaligned_copy_switch_race.c; path = "../../../Downloads/WDBFontOverwrite-main/WDBFontOverwrite/vm_unaligned_copy_switch_race.c"; sourceTree = "<group>"; };
 		3D16391C295B522F006D31D8 /* vm_unaligned_copy_switch_race.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vm_unaligned_copy_switch_race.h; path = "../../../Downloads/WDBFontOverwrite-main/WDBFontOverwrite/vm_unaligned_copy_switch_race.h"; sourceTree = "<group>"; };
 		3D163920295B58C8006D31D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../Downloads/AppIcons-3/Assets.xcassets"; sourceTree = "<group>"; };
+		3D163922295B73A0006D31D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +58,7 @@
 		3D163906295B51D8006D31D8 /* NoCameraSound */ = {
 			isa = PBXGroup;
 			children = (
+				3D163922295B73A0006D31D8 /* Info.plist */,
 				3D163907295B51D8006D31D8 /* NoCameraSoundApp.swift */,
 				3D163909295B51D8006D31D8 /* ContentView.swift */,
 				3D163917295B520E006D31D8 /* NoCameraSound.swift */,
@@ -283,6 +285,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NoCameraSound/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NoCameraSound/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NoCameraSound;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -294,7 +297,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.3;
+				MARKETING_VERSION = 4.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.straight-tamago.NoCameraSound";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -316,6 +319,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NoCameraSound/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NoCameraSound/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NoCameraSound;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -327,7 +331,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.3;
+				MARKETING_VERSION = 4.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.straight-tamago.NoCameraSound";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
