@@ -10,3 +10,5 @@ https://media.discordapp.net/attachments/1014483356655833099/1057405088274055249
 
 # Credits
 - https://github.com/zhuowei (MacDirtyCow exploit)
+
+- https://twitter.com/straight_tamago
