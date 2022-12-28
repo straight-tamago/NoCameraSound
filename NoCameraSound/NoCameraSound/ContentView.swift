@@ -49,11 +49,20 @@ struct ContentView: View {
                                 UIApplication.shared.open(url)
                             }
                         },
-                        .default(Text("Autorun at startup (Status: "+String(UserDefaults.standard.bool(forKey: "AutoRun"))+")")) {
+                        .default(Text("\(NSLocalizedString("Auto run when the app starts (Status: ", comment: ""))"+String(UserDefaults.standard.bool(forKey: "AutoRun"))+")")) {
                             if UserDefaults.standard.bool(forKey: "AutoRun") == true {
                                 UserDefaults.standard.set(false, forKey: "AutoRun")
                             }else {
                                 UserDefaults.standard.set(true, forKey: "AutoRun")
+                            }
+                        },
+                        .default(Text("\(NSLocalizedString("Camera silent + English notation (JP Only) (Status: ", comment: ""))"+String(UserDefaults.standard.bool(forKey: "Visibility"))+")")) {
+                            if Locale.preferredLanguages.first! == "ja-JP" {
+                                if UserDefaults.standard.bool(forKey: "Visibility") == true {
+                                    UserDefaults.standard.set(false, forKey: "Visibility")
+                                }else {
+                                    UserDefaults.standard.set(true, forKey: "Visibility")
+                                }
                             }
                         },
                         .cancel()
@@ -73,28 +82,34 @@ struct ContentView: View {
     }
     func ac() {
         message = "photoShutter.caf"
-        overwriteAsync(path: "/System/Library/Audio/UISounds/photoShutter.caf") {
+        overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/photoShutter.caf") {
             message = $0
         }
         message = "begin_record.caf"
-        overwriteAsync(path: "/System/Library/Audio/UISounds/begin_record.caf") {
+        overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/begin_record.caf") {
             message = $0
         }
         message = "end_record.caf"
-        overwriteAsync(path: "/System/Library/Audio/UISounds/end_record.caf") {
+        overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/end_record.caf") {
             message = $0
         }
-        message = "end_record.caf"
-        overwriteAsync(path: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst.caf") {
+        message = "camera_shutter_burst.caf"
+        overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst.caf") {
             message = $0
         }
-        message = "end_record.caf"
-        overwriteAsync(path: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_begin.caf") {
+        message = "camera_shutter_burst_begin.caf"
+        overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_begin.caf") {
             message = $0
         }
-        message = "end_record.caf"
-        overwriteAsync(path: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_end.caf") {
+        message = "camera_shutter_burst_end.caf"
+        overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_end.caf") {
             message = $0
+        }
+        if UserDefaults.standard.bool(forKey: "Visibility") == true && Locale.preferredLanguages.first! == "ja-JP" {
+            message = "CameraUI.strings"
+            overwriteAsync(TargetFilePath: "/System/Library/PrivateFrameworks/CameraUI.framework/ja.lproj/CameraUI.strings") {
+                message = $0
+            }
         }
     }
 }

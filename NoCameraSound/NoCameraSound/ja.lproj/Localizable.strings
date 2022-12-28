@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  NoCameraSound
+
+  Created by すとれーとたまご★ on 2022/12/28.
+  
+*/
+
+"by straight-tamago" = "by すとれーとたまご★";
+"Auto run when the app starts (Status: " = "アプリ起動時に無音化自動実行 (状態: ";
+"Camera silent + English notation (JP Only) (Status: " = "(可視性) 無音時にカメラを英語表記にする (状態: ";
