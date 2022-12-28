@@ -7,9 +7,9 @@
 
 import UIKit
 
-func overwriteAsync(path: String, completion: @escaping (String) -> Void) {
+func overwriteAsync(TargetFilePath: String, completion: @escaping (String) -> Void) {
   DispatchQueue.global(qos: .userInteractive).async {
-    let succeeded = overwriteShutterSound(path: path)
+    let succeeded = overwrite(TargetFilePath: TargetFilePath)
     DispatchQueue.main.async {
       let base = "0123456789"
       let randomStr = String((0..<2).map{ _ in base.randomElement()! })
@@ -18,20 +18,19 @@ func overwriteAsync(path: String, completion: @escaping (String) -> Void) {
   }
 }
 
-func overwriteShutterSound(path: String) -> Bool {
-  let BlankFileData = "xxx".data(using: .utf8)!
-  let TargetFilePath = path
-  let fd = open(TargetFilePath, O_RDONLY | O_CLOEXEC)
-  defer { close(fd) }
-  let Map = mmap(nil, BlankFileData.count, PROT_READ, MAP_SHARED, fd, 0)
-  if Map == MAP_FAILED {
+func overwrite(TargetFilePath: String) -> Bool {
+    let OverwriteFileData = "xxx".data(using: .utf8)!
+    let fd = open(TargetFilePath, O_RDONLY | O_CLOEXEC)
+    defer { close(fd) }
+    let Map = mmap(nil, OverwriteFileData.count, PROT_READ, MAP_SHARED, fd, 0)
+    if Map == MAP_FAILED {
+        return false
+    }
+  guard mlock(Map, OverwriteFileData.count) == 0 else {
     return false
   }
-  guard mlock(Map, BlankFileData.count) == 0 else {
-    return false
-  }
-  for chunkOff in stride(from: 0, to: BlankFileData.count, by: 0x4000) {
-    let dataChunk = BlankFileData[chunkOff..<min(BlankFileData.count, chunkOff + 0x3fff)]
+  for chunkOff in stride(from: 0, to: OverwriteFileData.count, by: 0x4000) {
+    let dataChunk = OverwriteFileData[chunkOff..<min(OverwriteFileData.count, chunkOff + 0x3fff)]
     var overwroteOne = false
     for _ in 0..<2 {
       let overwriteSucceeded = dataChunk.withUnsafeBytes { dataChunkBytes in
