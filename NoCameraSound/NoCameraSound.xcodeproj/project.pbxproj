@@ -11,9 +11,9 @@
 		3D16390A295B51D8006D31D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D163909295B51D8006D31D8 /* ContentView.swift */; };
 		3D16390F295B51DB006D31D8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D16390E295B51DB006D31D8 /* Preview Assets.xcassets */; };
 		3D163918295B520E006D31D8 /* NoCameraSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D163917295B520E006D31D8 /* NoCameraSound.swift */; };
-		3D163921295B58C8006D31D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D163920295B58C8006D31D8 /* Assets.xcassets */; };
 		3D16394B295C4ABF006D31D8 /* vm_unaligned_copy_switch_race.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D16394A295C4ABF006D31D8 /* vm_unaligned_copy_switch_race.c */; };
 		3D163953295C7029006D31D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D163955295C7029006D31D8 /* Localizable.strings */; };
+		3D163959295C7810006D31D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D163958295C7810006D31D8 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,11 +23,11 @@
 		3D16390E295B51DB006D31D8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3D163917295B520E006D31D8 /* NoCameraSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCameraSound.swift; sourceTree = "<group>"; };
 		3D163919295B5227006D31D8 /* NoCameraSound-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NoCameraSound-Bridging-Header.h"; sourceTree = "<group>"; };
-		3D163920295B58C8006D31D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../Downloads/AppIcons-3/Assets.xcassets"; sourceTree = "<group>"; };
 		3D163922295B73A0006D31D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3D163949295C4ABA006D31D8 /* vm_unaligned_copy_switch_race.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vm_unaligned_copy_switch_race.h; sourceTree = "<group>"; };
 		3D16394A295C4ABF006D31D8 /* vm_unaligned_copy_switch_race.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vm_unaligned_copy_switch_race.c; sourceTree = "<group>"; };
 		3D163954295C7029006D31D8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3D163958295C7810006D31D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +68,7 @@
 				3D163909295B51D8006D31D8 /* ContentView.swift */,
 				3D163917295B520E006D31D8 /* NoCameraSound.swift */,
 				3D163919295B5227006D31D8 /* NoCameraSound-Bridging-Header.h */,
-				3D163920295B58C8006D31D8 /* Assets.xcassets */,
+				3D163958295C7810006D31D8 /* Assets.xcassets */,
 				3D16390D295B51DB006D31D8 /* Preview Content */,
 			);
 			path = NoCameraSound;
@@ -142,8 +142,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D163921295B58C8006D31D8 /* Assets.xcassets in Resources */,
 				3D163953295C7029006D31D8 /* Localizable.strings in Resources */,
+				3D163959295C7810006D31D8 /* Assets.xcassets in Resources */,
 				3D16390F295B51DB006D31D8 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
