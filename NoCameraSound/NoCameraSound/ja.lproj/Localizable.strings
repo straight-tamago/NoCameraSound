@@ -8,4 +8,5 @@
 
 "by straight-tamago" = "by すとれーとたまご★";
 "Auto run when the app starts (Status: " = "アプリ起動時に無音化自動実行 (状態: ";
-"Camera silent + English notation (JP Only) (Status: " = "(視認性) 無音時にカメラを英語表記にする (状態: ";
+"Camera silent + English notation (JP Only) (Status: " = "(書き換えに成功したか) 無音化時にカメラを英語表記にする (状態: ";
+"View Log (Status: " = "ログを表示 (状態: ";
