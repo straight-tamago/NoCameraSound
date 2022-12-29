@@ -8,7 +8,7 @@ Reboot your device to revert the changes. (iOS14❌)
 https://media.discordapp.net/attachments/1014483356655833099/1057405088274055249/video_17370129658033-RmTGqIy9.mp4
 
 # Install
-apple-magnifier://install?url=https://github.com/straight-tamago/NoCameraSound/releases/download/4.7/NoCameraSound-4.7-2.ipa
+[TrollStore](apple-magnifier://install?url=https://github.com/straight-tamago/NoCameraSound/releases/download/4.7/NoCameraSound-4.7-2.ipa)
 
 # Credits
 - https://github.com/zhuowei (MacDirtyCow exploit)
