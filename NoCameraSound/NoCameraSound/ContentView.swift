@@ -25,21 +25,28 @@ struct ContentView: View {
             Text("NoCameraSound").font(.largeTitle).fontWeight(.bold)
             HStack {
                 Button("Disable Shutter Sound") {
-                    disable_shuttersound()
+                    if #available(iOS 15.0, *) {
+                        disable_shuttersound()
+                    }
+                    else {
+                        ios14Warning = true
+                    }
                 }
                 .padding()
                 .accentColor(Color.white)
                 .background(Color.blue)
                 .cornerRadius(26)
                 .shadow(color: Color.purple, radius: 15, x: 0, y: 5)
+                .alert(isPresented: $ios14Warning) {
+                    Alert(title: Text("IOS14 Warning"),
+                          message: Text("In iOS14, once executed, it will not revert."),
+                          primaryButton: .destructive(Text("Run"),action: disable_shuttersound),
+                          secondaryButton: .default(Text("Cancel"))
+                    )
+                }
                 
                 Button {
-                    if #available(iOS 15.0, *) {
-                        SettingsShowing = true
-                    }
-                    else {
-                        ios14Warning = true
-                    }
+                    SettingsShowing = true
                 } label: {
                     Image(systemName: "info.circle")
                         .padding()
@@ -87,12 +94,6 @@ struct ContentView: View {
                         },
                         .cancel()
                     ])
-                }.alert(isPresented: $ios14Warning) {
-                    Alert(title: Text("IOS14 Warning"),
-                          message: Text("In iOS14, once executed, it will not revert."),
-                          primaryButton: .destructive(Text("Run"),action: disable_shuttersound),
-                          secondaryButton: .default(Text("Cancel"))
-                    )
                 }
             }
             if ViewLog {
