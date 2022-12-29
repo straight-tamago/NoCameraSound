@@ -100,7 +100,7 @@ struct ContentView: View {
                     .padding()
             }
         }.onAppear {
-            LogText = "NoCameraSound v\(version) by straight-tamago"
+            LogText = "NoCameraSound v\(version) by straight-tamago"+"\n"
             if UserDefaults.standard.bool(forKey: "AutoRun") == true {
                 LogText += "(AutoRun)"+"\n"
                 disable_shuttersound()
