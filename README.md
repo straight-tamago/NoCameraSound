@@ -1,4 +1,4 @@
-# NoCameraSound (Demo)
+# NoCameraSound
 
 iOS 14 - 16.1.2
 
