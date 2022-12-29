@@ -11,7 +11,7 @@ struct ContentView: View {
     private let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     @State private var LogMessage = ""
     @State private var LogText = ""
-    @State private var ViewLog = false
+    @State private var ViewLog = true
     @State private var SettingsShowing = false
     @State private var ios14Warning = false
     var body: some View {
@@ -26,6 +26,7 @@ struct ContentView: View {
             HStack {
                 Button("Disable Shutter Sound") {
                     if #available(iOS 15.0, *) {
+                        LogText = ""
                         disable_shuttersound()
                     }
                     else {
@@ -97,10 +98,22 @@ struct ContentView: View {
                 }
             }
             if ViewLog {
-                TextEditor(text: $LogText)
+                ScrollViewReader { reader in
+                    ScrollView {
+                        Text(LogText)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(10)
+                            .id(30)
+                            .onChange(of: LogText) { newValue in
+                                withAnimation (.easeInOut){
+                                    reader.scrollTo(30)
+                                }
+                            }
+                    }
                     .frame(width: 300, height: 200)
                     .border(Color.black, width: 1)
                     .padding()
+                }
                 Text(LogMessage)
                     .padding()
             }else {
@@ -110,11 +123,12 @@ struct ContentView: View {
         }.onAppear {
             LogText = "NoCameraSound v\(version) by straight-tamago"+"\n"
             if UserDefaults.standard.bool(forKey: "AutoRun") == true {
+                LogText = ""
                 LogText += "(AutoRun)"+"\n"
                 disable_shuttersound()
             }
-            if UserDefaults.standard.bool(forKey: "ViewLog") == true {
-                ViewLog = true
+            if UserDefaults.standard.bool(forKey: "ViewLog") == false {
+                ViewLog = false
             }
         }
     }
@@ -123,7 +137,8 @@ struct ContentView: View {
     
 //    ---------------------------------------------------------------------------------------
     func disable_shuttersound() {
-        LogText += "Disabling Shutter Sound..."+"\n"
+        LogText += "NoCameraSound v\(version) by straight-tamago"+"\n"
+        LogText += "\nDisabling Shutter Sound..."
         ac()
         ac()
         ac()
@@ -133,26 +148,26 @@ struct ContentView: View {
     
     func ac() {
         overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/photoShutter.caf") {
-            LogText += "photoShutter.caf - "+$0+"\n"
+            LogText += "\nphotoShutter.caf \n- "+$0
             LogMessage = $0
             overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/begin_record.caf") {
-                LogText += "begin_record.caf - "+$0+"\n"
+                LogText += "\nbegin_record.caf \n- "+$0
                 LogMessage = $0
                 overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/end_record.caf") {
-                    LogText += "end_record.caf - "+$0+"\n"
+                    LogText += "\nend_record.caf \n- "+$0
                     LogMessage = $0
                     overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst.caf") {
-                        LogText += "camera_shutter_burst.caf - "+$0+"\n"
+                        LogText += "\ncamera_shutter_burst.caf \n- "+$0
                         LogMessage = $0
                         overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_begin.caf") {
-                            LogText += "camera_shutter_burst_begin.caf - "+$0+"\n"
+                            LogText += "\ncamera_shutter_burst_begin.caf \n- "+$0
                             LogMessage = $0
                             overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_end.caf") {
-                                LogText += "camera_shutter_burst_end.caf - "+$0+"\n"
+                                LogText += "\ncamera_shutter_burst_end.caf \n- "+$0
                                 LogMessage = $0
                                 if UserDefaults.standard.bool(forKey: "Visibility") == true && Locale.preferredLanguages.first! == "ja-JP" {
                                     overwriteAsync(TargetFilePath: "/System/Library/PrivateFrameworks/CameraUI.framework/ja.lproj/CameraUI.strings") {
-                                        LogText += "CameraUI.strings - "+$0+"\n"
+                                        LogText += "\nCameraUI.strings \n- "+$0
                                         LogMessage = $0
                                     }
                                 }
