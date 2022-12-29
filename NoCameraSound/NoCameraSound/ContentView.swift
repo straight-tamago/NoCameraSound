@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+    private let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     @State private var LogMessage = ""
     @State private var LogText = ""
     @State private var ViewLog = false
@@ -19,7 +19,7 @@ struct ContentView: View {
             Text("NoCameraSound").font(.largeTitle).fontWeight(.bold)
             HStack {
                 Button("Disable Shutter Sound") {
-                    LogText = ""
+                    LogText += "Disabling Shutter Sound..."+"\n"
                     ac()
                     ac()
                     ac()
@@ -101,10 +101,13 @@ struct ContentView: View {
                     .transition(.slide)
             }else {
                 Text(LogMessage)
+                    .padding()
             }
         }.onAppear {
+            LogText = "NoCameraSound v\(version) by straight-tamago"
             if UserDefaults.standard.bool(forKey: "AutoRun") == true {
-                LogText = "(AutoRun)"+"\n"
+                LogText += "(AutoRun)"+"\n"
+                LogText += "Disabling Shutter Sound..."+"\n"
                 ac()
                 ac()
                 ac()
