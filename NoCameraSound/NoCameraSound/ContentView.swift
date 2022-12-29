@@ -19,12 +19,7 @@ struct ContentView: View {
             Text("NoCameraSound").font(.largeTitle).fontWeight(.bold)
             HStack {
                 Button("Disable Shutter Sound") {
-                    LogText += "Disabling Shutter Sound..."+"\n"
-                    ac()
-                    ac()
-                    ac()
-                    ac()
-                    ac()
+                    disable_shuttersound()
                 }
                 .padding()
                 .accentColor(Color.white)
@@ -89,7 +84,8 @@ struct ContentView: View {
                 }.alert(isPresented: $ios14Warning) {
                     Alert(title: Text("IOS14 Warning"),
                           message: Text("In iOS14, once executed, it will not revert."),
-                          dismissButton: .default(Text("Run"))
+                          primaryButton: .destructive(Text("Run"),action: disable_shuttersound),
+                          secondaryButton: .default(Text("Cancel"))
                     )
                 }
             }
@@ -107,18 +103,26 @@ struct ContentView: View {
             LogText = "NoCameraSound v\(version) by straight-tamago"
             if UserDefaults.standard.bool(forKey: "AutoRun") == true {
                 LogText += "(AutoRun)"+"\n"
-                LogText += "Disabling Shutter Sound..."+"\n"
-                ac()
-                ac()
-                ac()
-                ac()
-                ac()
+                disable_shuttersound()
             }
             if UserDefaults.standard.bool(forKey: "ViewLog") == true {
                 ViewLog = true
             }
         }
     }
+    
+    
+    
+//    ---------------------------------------------------------------------------------------
+    func disable_shuttersound() {
+        LogText += "Disabling Shutter Sound..."+"\n"
+        ac()
+        ac()
+        ac()
+        ac()
+        ac()
+    }
+    
     func ac() {
         overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/photoShutter.caf") {
             LogText += "photoShutter.caf - "+$0+"\n"
