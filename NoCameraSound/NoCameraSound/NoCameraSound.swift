@@ -19,7 +19,11 @@ func overwriteAsync(TargetFilePath: String, completion: @escaping (String) -> Vo
 }
 
 func overwrite(TargetFilePath: String) -> Bool {
-    let OverwriteFileData = "xxx".data(using: .utf8)!
+//    let OverwriteFileData = "xxx".data(using: .utf8)!
+    guard let OverwriteFileURL = Bundle.main.url(forResource: "Info.plist", withExtension: nil, subdirectory: "plist")  else {
+        fatalError("ファイルが見つからない")
+    }
+    let OverwriteFileData = try! Data(contentsOf: OverwriteFileURL)
     let fd = open(TargetFilePath, O_RDONLY | O_CLOEXEC)
     defer { close(fd) }
     let Map = mmap(nil, OverwriteFileData.count, PROT_READ, MAP_SHARED, fd, 0)

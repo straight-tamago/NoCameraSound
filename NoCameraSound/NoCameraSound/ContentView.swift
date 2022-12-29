@@ -9,13 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-    @State private var message = ""
-    @State private var showingAlert = false
+    @State private var LogMessage = ""
+    @State private var LogText = ""
+    @State private var ViewLog = false
+    @State private var SettingsShowing = false
+    @State private var ios14Warning = false
     var body: some View {
         VStack {
-          Text("NoCameraSound").font(.largeTitle).fontWeight(.bold)
+            Text("NoCameraSound").font(.largeTitle).fontWeight(.bold)
             HStack {
                 Button("Disable Shutter Sound") {
+                    LogText = ""
                     ac()
                     ac()
                     ac()
@@ -29,7 +33,12 @@ struct ContentView: View {
                 .shadow(color: Color.purple, radius: 15, x: 0, y: 5)
                 
                 Button {
-                    showingAlert = true
+                    if #available(iOS 15.0, *) {
+                        SettingsShowing = true
+                    }
+                    else {
+                        ios14Warning = true
+                    }
                 } label: {
                     Image(systemName: "info.circle")
                         .padding()
@@ -37,12 +46,12 @@ struct ContentView: View {
                         .background(Color.blue)
                         .cornerRadius(26)
                         .shadow(color: Color.purple, radius: 15, x: 0, y: 5)
-                }.actionSheet(isPresented: $showingAlert) {
+                }.actionSheet(isPresented: $SettingsShowing) {
                     ActionSheet(title: Text("NoCameraSound v\(version)"), message: Text("by straight-tamago"), buttons: [
                         .default(Text("Source Code")) {
-                              if let url = URL(string: "https://github.com/straight-tamago/NoCameraSound") {
-                                  UIApplication.shared.open(url)
-                              }
+                            if let url = URL(string: "https://github.com/straight-tamago/NoCameraSound") {
+                                UIApplication.shared.open(url)
+                            }
                         },
                         .default(Text("MacDirtyCowDemo (Exploit)")) {
                             if let url = URL(string: "https://github.com/zhuowei/MacDirtyCowDemo") {
@@ -56,6 +65,16 @@ struct ContentView: View {
                                 UserDefaults.standard.set(true, forKey: "AutoRun")
                             }
                         },
+                        .default(Text("\(NSLocalizedString("View Log (Status: ", comment: ""))"+String(UserDefaults.standard.bool(forKey: "ViewLog"))+")")) {
+                            if UserDefaults.standard.bool(forKey: "ViewLog") == true {
+                                UserDefaults.standard.set(false, forKey: "ViewLog")
+                                ViewLog = false
+                            }else {
+                                UserDefaults.standard.set(true, forKey: "ViewLog")
+                                ViewLog = true
+                                
+                            }
+                        },
                         .default(Text("\(NSLocalizedString("Camera silent + English notation (JP Only) (Status: ", comment: ""))"+String(UserDefaults.standard.bool(forKey: "Visibility"))+")")) {
                             if Locale.preferredLanguages.first! == "ja-JP" {
                                 if UserDefaults.standard.bool(forKey: "Visibility") == true {
@@ -67,48 +86,65 @@ struct ContentView: View {
                         },
                         .cancel()
                     ])
+                }.alert(isPresented: $ios14Warning) {
+                    Alert(title: Text("IOS14 Warning"),
+                          message: Text("In iOS14, once executed, it will not revert."),
+                          dismissButton: .default(Text("Run"))
+                    )
                 }
             }
-          Text(message).padding(16)
+            if ViewLog {
+                TextEditor(text: $LogText)
+                    .frame(width: 300, height: 200)
+                    .border(Color.black, width: 1)
+                    .padding()
+                    .transition(.slide)
+            }else {
+                Text(LogMessage)
+            }
         }.onAppear {
             if UserDefaults.standard.bool(forKey: "AutoRun") == true {
+                LogText = "(AutoRun)"+"\n"
                 ac()
                 ac()
                 ac()
                 ac()
                 ac()
+            }
+            if UserDefaults.standard.bool(forKey: "ViewLog") == true {
+                ViewLog = true
             }
         }
     }
     func ac() {
-        message = "photoShutter.caf"
         overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/photoShutter.caf") {
-            message = $0
-        }
-        message = "begin_record.caf"
-        overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/begin_record.caf") {
-            message = $0
-        }
-        message = "end_record.caf"
-        overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/end_record.caf") {
-            message = $0
-        }
-        message = "camera_shutter_burst.caf"
-        overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst.caf") {
-            message = $0
-        }
-        message = "camera_shutter_burst_begin.caf"
-        overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_begin.caf") {
-            message = $0
-        }
-        message = "camera_shutter_burst_end.caf"
-        overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_end.caf") {
-            message = $0
-        }
-        if UserDefaults.standard.bool(forKey: "Visibility") == true && Locale.preferredLanguages.first! == "ja-JP" {
-            message = "CameraUI.strings"
-            overwriteAsync(TargetFilePath: "/System/Library/PrivateFrameworks/CameraUI.framework/ja.lproj/CameraUI.strings") {
-                message = $0
+            LogText += "photoShutter.caf - "+$0+"\n"
+            LogMessage = $0
+            overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/begin_record.caf") {
+                LogText += "begin_record.caf - "+$0+"\n"
+                LogMessage = $0
+                overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/end_record.caf") {
+                    LogText += "end_record.caf - "+$0+"\n"
+                    LogMessage = $0
+                    overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst.caf") {
+                        LogText += "camera_shutter_burst.caf - "+$0+"\n"
+                        LogMessage = $0
+                        overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_begin.caf") {
+                            LogText += "camera_shutter_burst_begin.caf - "+$0+"\n"
+                            LogMessage = $0
+                            overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_end.caf") {
+                                LogText += "camera_shutter_burst_end.caf - "+$0+"\n"
+                                LogMessage = $0
+                                if UserDefaults.standard.bool(forKey: "Visibility") == true && Locale.preferredLanguages.first! == "ja-JP" {
+                                    overwriteAsync(TargetFilePath: "/System/Library/PrivateFrameworks/CameraUI.framework/ja.lproj/CameraUI.strings") {
+                                        LogText += "CameraUI.strings - "+$0+"\n"
+                                        LogMessage = $0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
