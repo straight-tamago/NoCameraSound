@@ -16,6 +16,12 @@ struct ContentView: View {
     @State private var ios14Warning = false
     var body: some View {
         VStack {
+            if ViewLog {
+                Text("")
+                    .frame(width: 300, height: 200)
+                    .padding()
+                    .disabled(true)
+            }
             Text("NoCameraSound").font(.largeTitle).fontWeight(.bold)
             HStack {
                 Button("Disable Shutter Sound") {
@@ -94,7 +100,8 @@ struct ContentView: View {
                     .frame(width: 300, height: 200)
                     .border(Color.black, width: 1)
                     .padding()
-                    .transition(.slide)
+                Text(LogMessage)
+                    .padding()
             }else {
                 Text(LogMessage)
                     .padding()
