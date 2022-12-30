@@ -193,21 +193,10 @@ struct ContentView: View {
     //    ---------------------------------------------------------------------------------------
     func disable_shuttersound() {
         LogMessage = "Disabling..."
-        ac()
-        ac()
-        ac()
-        ac()
-        ac()
-    }
-    
-    func ac() {
         TargetFilesPath.forEach {
-            overwriteAsync(TargetFilePath: $0.path) {
-                LogMessage = $0
-            }
+            LogMessage = overwrite(TargetFilePath: $0.path)
         }
     }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
