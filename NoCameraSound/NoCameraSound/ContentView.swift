@@ -10,20 +10,22 @@ import SwiftUI
 struct ContentView: View {
     private let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     @State private var LogMessage = ""
-    @State private var LogText = ""
+    @State var LogText = ""
     @State private var ViewLog = true
     @State private var SettingsShowing = false
     @State private var ios14Warning = false
+    @State private var Notcompatiblewithios14 = false
     var body: some View {
         VStack {
             if ViewLog {
                 Text("")
                     .frame(width: 300, height: 200)
-                    .padding()
+                    .padding(.top, 10)
                     .disabled(true)
             }
             Text("NoCameraSound").font(.largeTitle).fontWeight(.bold)
             HStack {
+                //---------------------------------------------------------------------------
                 Button("Disable Shutter Sound") {
                     if #available(iOS 15.0, *) {
                         LogText = ""
@@ -45,7 +47,7 @@ struct ContentView: View {
                           secondaryButton: .default(Text("Cancel"))
                     )
                 }
-                
+                //---------------------------------------------------------------------------
                 Button {
                     SettingsShowing = true
                 } label: {
@@ -68,10 +70,15 @@ struct ContentView: View {
                             }
                         },
                         .default(Text("\(NSLocalizedString("Auto run when the app starts (Status: ", comment: ""))"+String(UserDefaults.standard.bool(forKey: "AutoRun"))+")")) {
-                            if UserDefaults.standard.bool(forKey: "AutoRun") == true {
-                                UserDefaults.standard.set(false, forKey: "AutoRun")
-                            }else {
-                                UserDefaults.standard.set(true, forKey: "AutoRun")
+                            if #available(iOS 15.0, *) {
+                                if UserDefaults.standard.bool(forKey: "AutoRun") == true {
+                                    UserDefaults.standard.set(false, forKey: "AutoRun")
+                                }else {
+                                    UserDefaults.standard.set(true, forKey: "AutoRun")
+                                }
+                            }
+                            else {
+                                Notcompatiblewithios14 = true
                             }
                         },
                         .default(Text("\(NSLocalizedString("View Log (Status: ", comment: ""))"+String(UserDefaults.standard.bool(forKey: "ViewLog"))+")")) {
@@ -81,24 +88,37 @@ struct ContentView: View {
                             }else {
                                 UserDefaults.standard.set(true, forKey: "ViewLog")
                                 ViewLog = true
-                                
                             }
                         },
                         .default(Text("\(NSLocalizedString("Camera silent + English notation (JP Only) (Status: ", comment: ""))"+String(UserDefaults.standard.bool(forKey: "Visibility"))+")")) {
-                            if Locale.preferredLanguages.first! == "ja-JP" {
-                                if UserDefaults.standard.bool(forKey: "Visibility") == true {
-                                    UserDefaults.standard.set(false, forKey: "Visibility")
-                                }else {
-                                    UserDefaults.standard.set(true, forKey: "Visibility")
+                            if #available(iOS 15.0, *) {
+                                if Locale.preferredLanguages.first! == "ja-JP" {
+                                    if UserDefaults.standard.bool(forKey: "Visibility") == true {
+                                        UserDefaults.standard.set(false, forKey: "Visibility")
+                                    }else {
+                                        UserDefaults.standard.set(true, forKey: "Visibility")
+                                    }
                                 }
+                            }
+                            else {
+                                Notcompatiblewithios14 = true
                             }
                         },
                         .cancel()
                     ])
                 }
+                .alert(isPresented: $Notcompatiblewithios14) {
+                    Alert(title: Text("Not　compatible　with　ios14"),
+                          primaryButton: .destructive(Text("OK")),
+                          secondaryButton: .default(Text("Cancel"))
+                    )
+                }
+                //---------------------------------------------------------------------------
             }
             if ViewLog {
                 ScrollViewReader { reader in
+                    Text(LogMessage)
+                        .padding(.top, 10)
                     ScrollView {
                         Text(LogText)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -112,15 +132,15 @@ struct ContentView: View {
                     }
                     .frame(width: 300, height: 200)
                     .border(Color.black, width: 1)
-                    .padding()
+                    .padding(.top, 10)
                 }
-                Text(LogMessage)
-                    .padding()
+                
             }else {
                 Text(LogMessage)
                     .padding()
             }
         }.onAppear {
+            LogMessage = "v\(version)"
             LogText = "NoCameraSound v\(version) by straight-tamago"+"\n"
             if UserDefaults.standard.bool(forKey: "AutoRun") == true {
                 LogText = ""
@@ -134,8 +154,7 @@ struct ContentView: View {
     }
     
     
-    
-//    ---------------------------------------------------------------------------------------
+    //    ---------------------------------------------------------------------------------------
     func disable_shuttersound() {
         LogText += "NoCameraSound v\(version) by straight-tamago"+"\n"
         LogText += "\nDisabling Shutter Sound..."
@@ -181,7 +200,7 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-  }
+    static var previews: some View {
+        ContentView()
+    }
 }
