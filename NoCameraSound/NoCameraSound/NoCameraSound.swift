@@ -19,15 +19,17 @@ import UIKit
 //}
 
 func overwrite(TargetFilePath: String) -> String {
+    let base = "0123456789"
+    let randomStr = String((0..<2).map{ _ in base.randomElement()! })
     let OverwriteFileData = "xxx".data(using: .utf8)!
     let fd = open(TargetFilePath, O_RDONLY | O_CLOEXEC)
     defer { close(fd) }
     let Map = mmap(nil, OverwriteFileData.count, PROT_READ, MAP_SHARED, fd, 0)
     if Map == MAP_FAILED {
-        return "mmap Error"
+        return "mmap Error - "+randomStr
     }
     guard mlock(Map, OverwriteFileData.count) == 0 else {
-        return "mlock Error"
+        return "mlock Error - "+randomStr
     }
     for chunkOff in stride(from: 0, to: OverwriteFileData.count, by: 0x4000) {
         let dataChunk = OverwriteFileData[chunkOff..<min(OverwriteFileData.count, chunkOff + 0x3fff)]
@@ -44,11 +46,11 @@ func overwrite(TargetFilePath: String) -> String {
             sleep(1)
         }
         guard overwroteOne else {
-            return "unknown Error"
+            return "unknown Error - "+randomStr
         }
     }
     print("Success")
-    return "Success"
+    return "Success - "+randomStr
 }
 
 func IsSucceeded(TargetFilePath: String) -> Bool {
