@@ -50,3 +50,17 @@ func overwrite(TargetFilePath: String) -> Bool {
     print("Success")
     return true
 }
+
+func IsSucceeded(TargetFilePath: String) -> Bool {
+    guard let data = try? Data(contentsOf: URL(string: TargetFilePath)!) else {
+        return false
+    }
+    var databinary = data[0..<3].map { String(format: "%02X", $0)}
+    var dataString = databinary.joined()
+    print(dataString)
+    if dataString != "787878" {
+        return false
+    }
+    return true
+}
+    
