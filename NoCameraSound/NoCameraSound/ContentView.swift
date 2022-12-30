@@ -10,11 +10,42 @@ import SwiftUI
 struct ContentView: View {
     private let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     @State private var LogMessage = ""
-    @State var LogText = ""
     @State private var ViewLog = true
     @State private var SettingsShowing = false
     @State private var ios14Warning = false
+    @State private var Rerun = false
     @State private var Notcompatiblewithios14 = false
+    struct TargetFilesPath_Struct: Identifiable {
+      let id = UUID()
+      let title: String
+      let path: String
+    }
+    @State private var TargetFilesPath = [
+        TargetFilesPath_Struct(
+            title: "photoShutter.caf",
+            path: "/System/Library/Audio/UISounds/photoShutter.caf"
+        ),
+        TargetFilesPath_Struct(
+            title: "begin_record.caf",
+            path: "/System/Library/Audio/UISounds/begin_record.caf"
+        ),
+        TargetFilesPath_Struct(
+            title: "end_record.caf",
+            path: "/System/Library/Audio/UISounds/end_record.caf"
+        ),
+        TargetFilesPath_Struct(
+            title: "camera_shutter_burst.caf",
+            path: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst.caf"
+        ),
+        TargetFilesPath_Struct(
+            title: "camera_shutter_burst_begin.caf",
+            path: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_begin.caf"
+        ),
+        TargetFilesPath_Struct(
+            title: "camera_shutter_burst_end.caf",
+            path: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_end.caf"
+        ),
+    ]
     var body: some View {
         VStack {
             if ViewLog {
@@ -26,26 +57,44 @@ struct ContentView: View {
             Text("NoCameraSound").font(.largeTitle).fontWeight(.bold)
             HStack {
                 //---------------------------------------------------------------------------
-                Button("Disable Shutter Sound") {
-                    if #available(iOS 15.0, *) {
-                        LogText = ""
-                        disable_shuttersound()
+                if TargetFilesPath.allSatisfy { IsSucceeded(TargetFilePath: "file://"+$0.path) == true } == false {
+                    Button("Disable Shutter Sound") {
+                        if #available(iOS 15.0, *) {
+                            disable_shuttersound()
+                        }
+                        else {
+                            ios14Warning = true
+                        }
                     }
-                    else {
-                        ios14Warning = true
+                    .padding()
+                    .accentColor(Color.white)
+                    .background(Color.blue)
+                    .cornerRadius(26)
+                    .shadow(color: Color.purple, radius: 15, x: 0, y: 5)
+                    .alert(isPresented: $ios14Warning) {
+                        Alert(title: Text("IOS14 Warning"),
+                              message: Text("In iOS14, once executed, it will not revert."),
+                              primaryButton: .destructive(Text("Run"),action: disable_shuttersound),
+                              secondaryButton: .default(Text("Cancel"))
+                        )
                     }
                 }
-                .padding()
-                .accentColor(Color.white)
-                .background(Color.blue)
-                .cornerRadius(26)
-                .shadow(color: Color.purple, radius: 15, x: 0, y: 5)
-                .alert(isPresented: $ios14Warning) {
-                    Alert(title: Text("IOS14 Warning"),
-                          message: Text("In iOS14, once executed, it will not revert."),
-                          primaryButton: .destructive(Text("Run"),action: disable_shuttersound),
-                          secondaryButton: .default(Text("Cancel"))
-                    )
+                else {
+                    Button("Disabled Shutter Sound") {
+                        Rerun = true
+                    }
+                    .padding()
+                    .accentColor(Color.white)
+                    .background(Color.blue)
+                    .cornerRadius(26)
+                    .shadow(color: Color.purple, radius: 15, x: 0, y: 5)
+                    .alert(isPresented: $Rerun) {
+                        Alert(title: Text("Disabled Shutter Sound"),
+                              message: Text("Rerun"),
+                              primaryButton: .destructive(Text("Run"),action: disable_shuttersound),
+                              secondaryButton: .default(Text("Cancel"))
+                        )
+                    }
                 }
                 //---------------------------------------------------------------------------
                 Button {
@@ -90,20 +139,6 @@ struct ContentView: View {
                                 ViewLog = true
                             }
                         },
-                        .default(Text("\(NSLocalizedString("Camera silent + English notation (JP Only) (Status: ", comment: ""))"+String(UserDefaults.standard.bool(forKey: "Visibility"))+")")) {
-                            if #available(iOS 15.0, *) {
-                                if Locale.preferredLanguages.first! == "ja-JP" {
-                                    if UserDefaults.standard.bool(forKey: "Visibility") == true {
-                                        UserDefaults.standard.set(false, forKey: "Visibility")
-                                    }else {
-                                        UserDefaults.standard.set(true, forKey: "Visibility")
-                                    }
-                                }
-                            }
-                            else {
-                                Notcompatiblewithios14 = true
-                            }
-                        },
                         .cancel()
                     ])
                 }
@@ -116,35 +151,36 @@ struct ContentView: View {
                 //---------------------------------------------------------------------------
             }
             if ViewLog {
-                ScrollViewReader { reader in
                     Text(LogMessage)
                         .padding(.top, 10)
-                    ScrollView {
-                        Text(LogText)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(10)
-                            .id(30)
-                            .onChange(of: LogText) { newValue in
-                                withAnimation (.easeInOut){
-                                    reader.scrollTo(30)
-                                }
-                            }
-                    }
+                        List {
+                            ForEach(TargetFilesPath) { item in
+                              HStack {
+                                Text(item.title)
+                                Spacer()
+                                  if IsSucceeded(TargetFilePath: "file://"+item.path) == true {
+                                      Text(
+                                        String(IsSucceeded(TargetFilePath: "file://"+item.path))
+                                              .replacingOccurrences(of: "true", with: "OFF")
+                                      ).foregroundColor(.green)
+                                  }else {
+                                      Text(
+                                          String(IsSucceeded(TargetFilePath: "file://"+item.path))
+                                              .replacingOccurrences(of: "false", with: "ON")
+                                      ).foregroundColor(.red)
+                                  }
+                              }
+                            }.frame(height: 1)
+                        }
+                    .listStyle(.plain)
                     .frame(width: 300, height: 200)
-                    .border(Color.black, width: 1)
-                    .padding(.top, 10)
-                }
-                
             }else {
                 Text(LogMessage)
-                    .padding()
+                    .padding(.top, 10)
             }
         }.onAppear {
             LogMessage = "v\(version)"
-            LogText = "NoCameraSound v\(version) by straight-tamago"+"\n"
             if UserDefaults.standard.bool(forKey: "AutoRun") == true {
-                LogText = ""
-                LogText += "(AutoRun)"+"\n"
                 disable_shuttersound()
             }
             if UserDefaults.standard.bool(forKey: "ViewLog") == false {
@@ -156,8 +192,7 @@ struct ContentView: View {
     
     //    ---------------------------------------------------------------------------------------
     func disable_shuttersound() {
-        LogText += "NoCameraSound v\(version) by straight-tamago"+"\n"
-        LogText += "\nDisabling Shutter Sound..."
+        LogMessage = "Disabling..."
         ac()
         ac()
         ac()
@@ -166,37 +201,13 @@ struct ContentView: View {
     }
     
     func ac() {
-        overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/photoShutter.caf") {
-            LogText += "\nphotoShutter.caf \n- "+$0
-            LogMessage = $0
-            overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/begin_record.caf") {
-                LogText += "\nbegin_record.caf \n- "+$0
+        TargetFilesPath.forEach {
+            overwriteAsync(TargetFilePath: $0.path) {
                 LogMessage = $0
-                overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/end_record.caf") {
-                    LogText += "\nend_record.caf \n- "+$0
-                    LogMessage = $0
-                    overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst.caf") {
-                        LogText += "\ncamera_shutter_burst.caf \n- "+$0
-                        LogMessage = $0
-                        overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_begin.caf") {
-                            LogText += "\ncamera_shutter_burst_begin.caf \n- "+$0
-                            LogMessage = $0
-                            overwriteAsync(TargetFilePath: "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_end.caf") {
-                                LogText += "\ncamera_shutter_burst_end.caf \n- "+$0
-                                LogMessage = $0
-                                if UserDefaults.standard.bool(forKey: "Visibility") == true && Locale.preferredLanguages.first! == "ja-JP" {
-                                    overwriteAsync(TargetFilePath: "/System/Library/PrivateFrameworks/CameraUI.framework/ja.lproj/CameraUI.strings") {
-                                        LogText += "\nCameraUI.strings \n- "+$0
-                                        LogMessage = $0
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
