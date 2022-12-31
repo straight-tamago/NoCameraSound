@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 //func overwriteAsync(TargetFilePath: String, completion: @escaping (String) -> Void) {
 //    DispatchQueue.global(qos: .userInteractive).async {
@@ -26,9 +27,11 @@ func overwrite(TargetFilePath: String) -> String {
     defer { close(fd) }
     let Map = mmap(nil, OverwriteFileData.count, PROT_READ, MAP_SHARED, fd, 0)
     if Map == MAP_FAILED {
+        print("mmap Error")
         return "mmap Error - "+randomStr
     }
     guard mlock(Map, OverwriteFileData.count) == 0 else {
+        print("mlock Error")
         return "mlock Error - "+randomStr
     }
     for chunkOff in stride(from: 0, to: OverwriteFileData.count, by: 0x4000) {
@@ -46,6 +49,7 @@ func overwrite(TargetFilePath: String) -> String {
             sleep(1)
         }
         guard overwroteOne else {
+            print("unknown Error")
             return "unknown Error - "+randomStr
         }
     }
@@ -65,4 +69,3 @@ func IsSucceeded(TargetFilePath: String) -> Bool {
     }
     return true
 }
-    
