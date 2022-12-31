@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var ios14Warning = false
     @State private var Rerun = false
     @State private var UpdateAlert = false
+    @State private var NoUpdateAlert = false
     @State private var Notcompatiblewithios14 = false
     struct TargetFilesPath_Struct: Identifiable {
       var  id = UUID()
@@ -150,6 +151,7 @@ struct ContentView: View {
                                     let latast_v = object["tag_name"]!
                                     if version != latast_v as! String {
                                         UpdateAlert = true
+                                        NoUpdateAlert = true
                                         return
                                     }
                                 } catch {
@@ -176,6 +178,11 @@ struct ContentView: View {
                         }
                     }),
                           secondaryButton: .default(Text("Cancel"))
+                    )
+                }
+                .alert(isPresented: $NoUpdateAlert) {
+                    Alert(title: Text("No Update"),
+                          dismissButton: .destructive(Text("OK"))
                     )
                 }
                 //---------------------------------------------------------------------------
