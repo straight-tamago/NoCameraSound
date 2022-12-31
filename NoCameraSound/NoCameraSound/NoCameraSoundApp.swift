@@ -2,7 +2,7 @@
 //  NoCameraSoundApp.swift
 //  NoCameraSound
 //
-//  Created by すとれーとたまご★ on 2022/12/28.
+//  Created by straight-tamago★ on 2022/12/28.
 //
 
 import SwiftUI

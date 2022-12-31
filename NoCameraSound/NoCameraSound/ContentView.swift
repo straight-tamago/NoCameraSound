@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  NoCameraSound
 //
-//  Created by すとれーとたまご★ on 2022/12/28.
+//  Created by straight-tamago★ on 2022/12/28.
 //
 
 import SwiftUI
@@ -160,13 +160,11 @@ struct ContentView: View {
                                 Spacer()
                                   if IsSucceeded(TargetFilePath: "file://"+item.path) == true {
                                       Text(
-                                        String(IsSucceeded(TargetFilePath: "file://"+item.path))
-                                              .replacingOccurrences(of: "true", with: "OFF")
+                                        String("OFF")
                                       ).foregroundColor(.green)
                                   }else {
                                       Text(
-                                          String(IsSucceeded(TargetFilePath: "file://"+item.path))
-                                              .replacingOccurrences(of: "false", with: "ON")
+                                          String("ON")
                                       ).foregroundColor(.red)
                                   }
                               }
