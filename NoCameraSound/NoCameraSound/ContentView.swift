@@ -14,9 +14,10 @@ struct ContentView: View {
     @State private var SettingsShowing = false
     @State private var ios14Warning = false
     @State private var Rerun = false
+    @State private var UpdateAlert = false
     @State private var Notcompatiblewithios14 = false
     struct TargetFilesPath_Struct: Identifiable {
-      let id = UUID()
+      var  id = UUID()
       let title: String
       let path: String
     }
@@ -139,12 +140,41 @@ struct ContentView: View {
                                 ViewLog = true
                             }
                         },
+                        .default(Text("\(NSLocalizedString("Update Check", comment: ""))")) {
+                            let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+                            let url = URL(string: "https://api.github.com/repos/straight-tamago/NoCameraSound/releases/latest")
+                            let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
+                                guard let data = data else { return }
+                                do {
+                                    let object = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String: Any]
+                                    let latast_v = object["tag_name"]!
+                                    if version != latast_v as! String {
+                                        UpdateAlert = true
+                                        return
+                                    }
+                                } catch {
+                                    print(error)
+                                }
+                            }
+                            task.resume()
+                        },
                         .cancel()
                     ])
                 }
                 .alert(isPresented: $Notcompatiblewithios14) {
                     Alert(title: Text("Not　compatible　with　ios14"),
                           primaryButton: .destructive(Text("OK")),
+                          secondaryButton: .default(Text("Cancel"))
+                    )
+                }
+                .alert(isPresented: $UpdateAlert) {
+                    Alert(title: Text("Update available"),
+                          message: Text("Do you want to download the update from the Github ?"),
+                          primaryButton: .destructive(Text("OK"),action: {
+                        if let url = URL(string: "https://github.com/straight-tamago/NoCameraSound/releases") {
+                            UIApplication.shared.open(url)
+                        }
+                    }),
                           secondaryButton: .default(Text("Cancel"))
                     )
                 }
@@ -183,6 +213,12 @@ struct ContentView: View {
             }
             if UserDefaults.standard.bool(forKey: "ViewLog") == false {
                 ViewLog = false
+            }
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+                // なぜか更新されないから無理矢理
+                // 多分osが勝手にやってるから
+                print("List refresh")
+                TargetFilesPath[0].id = UUID()
             }
         }
     }
