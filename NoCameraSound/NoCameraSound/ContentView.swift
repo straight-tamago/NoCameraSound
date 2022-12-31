@@ -57,6 +57,11 @@ struct ContentView: View {
                     .disabled(true)
             }
             Text("NoCameraSound").font(.largeTitle).fontWeight(.bold)
+                .alert(isPresented: $NoUpdateAlert) {
+                    Alert(title: Text("No Update"),
+                          dismissButton: .default(Text("OK"))
+                    )
+                }
             HStack {
                 //---------------------------------------------------------------------------
                 if TargetFilesPath.allSatisfy { IsSucceeded(TargetFilePath: "file://"+$0.path) == true } == false {
@@ -150,9 +155,11 @@ struct ContentView: View {
                                     let object = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String: Any]
                                     let latast_v = object["tag_name"]!
                                     if version != latast_v as! String {
+                                        print("update")
                                         UpdateAlert = true
+                                    }else{
+                                        print("no update")
                                         NoUpdateAlert = true
-                                        return
                                     }
                                 } catch {
                                     print(error)
@@ -178,11 +185,6 @@ struct ContentView: View {
                         }
                     }),
                           secondaryButton: .default(Text("Cancel"))
-                    )
-                }
-                .alert(isPresented: $NoUpdateAlert) {
-                    Alert(title: Text("No Update"),
-                          dismissButton: .destructive(Text("OK"))
                     )
                 }
                 //---------------------------------------------------------------------------
