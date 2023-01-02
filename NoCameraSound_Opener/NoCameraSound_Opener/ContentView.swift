@@ -6,13 +6,50 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct ContentView: View {
+    @Environment(\.scenePhase) private var scenePhase
+    private let player = AVPlayer(url: Bundle.main.url(forResource: "tutorial", withExtension: "mp4")!)
     var body: some View {
-        Text("Opening NoCameraShortcut Shortcut")
-            .multilineTextAlignment(.center)
-            .font(.title)
-        Indicator().frame(width: 100, height: 100)
+        VStack {
+            if UserDefaults.standard.bool(forKey: "Firstboot") == false {
+                Text("Firstboot - Setup")
+                    .font(.title)
+                Text("No Shortcut Banner!!!!")
+                    .font(.title)
+                VideoPlayer(player: player)
+                    .frame(height: 600, alignment: .bottomTrailing)
+                Button("I understand") {
+                    UserDefaults.standard.set(true, forKey: "Firstboot")
+                    
+                    if let url = URL(string: "shortcuts://run-shortcut?name=NoCameraSound") {
+                        UIApplication.shared.open(url)
+                    }
+                }
+                .font(.title)
+            }else {
+                Text("Opening NoCameraSound Shortcut")
+                    .multilineTextAlignment(.center)
+                    .font(.title)
+                    .onChange(of: scenePhase) { phase in
+                        if phase == .background {
+                            print("バックグラウンド！")
+                            
+                        }
+                        if phase == .active {
+                            print("フォアグラウンド！")
+                            if let url = URL(string: "shortcuts://run-shortcut?name=NoCameraSound") {
+                                UIApplication.shared.open(url)
+                            }
+                        }
+                        if phase == .inactive {
+                            print("バックグラウンドorフォアグラウンド直前")
+                        }
+                    }
+                Indicator().frame(width: 100, height: 100)
+            }
+        }
     }
 }
 
