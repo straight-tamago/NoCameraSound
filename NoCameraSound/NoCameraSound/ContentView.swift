@@ -250,9 +250,10 @@ struct ContentView: View {
         LogMessage = "Disabling..."
         TargetFilesPath.forEach {
             LogMessage = overwrite(TargetFilePath: $0.path)
-            
-            TargetFilesPath.forEach {
-                LogMessage = overwrite(TargetFilePath: $0.path)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                TargetFilesPath.forEach {
+                    LogMessage = overwrite(TargetFilePath: $0.path)
+                }
             }
         }
     }
