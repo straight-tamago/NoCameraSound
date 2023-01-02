@@ -9,14 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Opening NoSoundCamera\n&\n[OpenCamera] Shortcut")
+        Text("Opening NoCameraShortcut Shortcut")
             .multilineTextAlignment(.center)
             .font(.title)
-            .onAppear {
-                if let url = URL(string: "NoCameraSound://OpenCamera") {
-                    UIApplication.shared.open(url)
-                }
-            }
         Indicator().frame(width: 100, height: 100)
     }
 }
