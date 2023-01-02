@@ -13,7 +13,7 @@
 		3D163918295B520E006D31D8 /* NoCameraSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D163917295B520E006D31D8 /* NoCameraSound.swift */; };
 		3D16394B295C4ABF006D31D8 /* vm_unaligned_copy_switch_race.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D16394A295C4ABF006D31D8 /* vm_unaligned_copy_switch_race.c */; };
 		3D163953295C7029006D31D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D163955295C7029006D31D8 /* Localizable.strings */; };
-		3D163959295C7810006D31D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D163958295C7810006D31D8 /* Assets.xcassets */; };
+		3DD9A1B72962C74800EC8C43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DD9A1B62962C74700EC8C43 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +27,8 @@
 		3D163949295C4ABA006D31D8 /* vm_unaligned_copy_switch_race.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vm_unaligned_copy_switch_race.h; sourceTree = "<group>"; };
 		3D16394A295C4ABF006D31D8 /* vm_unaligned_copy_switch_race.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vm_unaligned_copy_switch_race.c; sourceTree = "<group>"; };
 		3D163954295C7029006D31D8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3D163958295C7810006D31D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D2342AC295FFFE600A6E40D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3DD9A1B62962C74700EC8C43 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +69,7 @@
 				3D163909295B51D8006D31D8 /* ContentView.swift */,
 				3D163917295B520E006D31D8 /* NoCameraSound.swift */,
 				3D163919295B5227006D31D8 /* NoCameraSound-Bridging-Header.h */,
-				3D163958295C7810006D31D8 /* Assets.xcassets */,
+				3DD9A1B62962C74700EC8C43 /* Assets.xcassets */,
 				3D16390D295B51DB006D31D8 /* Preview Content */,
 			);
 			path = NoCameraSound;
@@ -144,7 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D163953295C7029006D31D8 /* Localizable.strings in Resources */,
-				3D163959295C7810006D31D8 /* Assets.xcassets in Resources */,
+				3DD9A1B72962C74800EC8C43 /* Assets.xcassets in Resources */,
 				3D16390F295B51DB006D31D8 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,7 +316,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.4;
+				MARKETING_VERSION = 5.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.straight-tamago.NoCameraSound";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -351,7 +351,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.4;
+				MARKETING_VERSION = 5.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.straight-tamago.NoCameraSound";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
