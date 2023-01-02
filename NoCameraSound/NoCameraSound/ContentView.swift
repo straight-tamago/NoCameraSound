@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.scenePhase) private var scenePhase
     private let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     @State private var LogMessage = ""
     @State private var ViewLog = true
@@ -217,9 +218,6 @@ struct ContentView: View {
             }
         }.onAppear {
             LogMessage = "v\(version)"
-            if UserDefaults.standard.bool(forKey: "AutoRun") == true {
-                disable_shuttersound()
-            }
             if UserDefaults.standard.bool(forKey: "ViewLog") == false {
                 ViewLog = false
             }
@@ -228,6 +226,20 @@ struct ContentView: View {
                 // 多分osが勝手にやってるから
                 print("List refresh")
                 TargetFilesPath[0].id = UUID()
+            }
+        }
+        .onChange(of: scenePhase) { phase in
+            if phase == .background {
+                print("バックグラウンド！")
+            }
+            if phase == .active {
+                print("フォアグラウンド！")
+                if UserDefaults.standard.bool(forKey: "AutoRun") == true {
+                    disable_shuttersound()
+                }
+            }
+            if phase == .inactive {
+                print("バックグラウンドorフォアグラウンド直前")
             }
         }
     }

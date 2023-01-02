@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  NoCameraSound_Opener
 //
-//  Created by mini on 2023/01/02.
+//  Created by straight-tamago on 2023/01/02.
 //
 
 import SwiftUI
