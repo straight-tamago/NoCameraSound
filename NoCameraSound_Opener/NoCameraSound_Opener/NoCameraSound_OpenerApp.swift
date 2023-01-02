@@ -21,7 +21,7 @@ struct NoCameraSound_OpenerApp: App {
             }
             if phase == .active {
                 print("フォアグラウンド！")
-                if let url = URL(string: "NoCameraSound://OpenCamera") {
+                if let url = URL(string: "shortcuts://run-shortcut?name=NoCameraShortcut") {
                     UIApplication.shared.open(url)
                 }
             }

@@ -230,14 +230,6 @@ struct ContentView: View {
                 TargetFilesPath[0].id = UUID()
             }
         }
-        .onOpenURL { url in
-            if url.host == "OpenCamera" {
-                disable_shuttersound()
-                if let url = URL(string: "shortcuts://run-shortcut?name=OpenCamera") {
-                    UIApplication.shared.open(url)
-                }
-            }
-        }
     }
     
     
