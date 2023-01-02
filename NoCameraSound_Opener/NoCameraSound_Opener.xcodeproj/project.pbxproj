@@ -11,6 +11,7 @@
 		3D9D4B162961FA4A0092C953 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9D4B152961FA4A0092C953 /* ContentView.swift */; };
 		3D9D4B182961FA4C0092C953 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D9D4B172961FA4C0092C953 /* Assets.xcassets */; };
 		3D9D4B1B2961FA4C0092C953 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D9D4B1A2961FA4C0092C953 /* Preview Assets.xcassets */; };
+		3DD9A1C129630AFB00EC8C43 /* tutorial.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3DD9A1C029630AEB00EC8C43 /* tutorial.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		3D9D4B152961FA4A0092C953 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3D9D4B172961FA4C0092C953 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D9D4B1A2961FA4C0092C953 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3DD9A1C029630AEB00EC8C43 /* tutorial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tutorial.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 				3D9D4B132961FA4A0092C953 /* NoCameraSound_OpenerApp.swift */,
 				3D9D4B152961FA4A0092C953 /* ContentView.swift */,
 				3D9D4B172961FA4C0092C953 /* Assets.xcassets */,
+				3DD9A1C029630AEB00EC8C43 /* tutorial.mp4 */,
 				3D9D4B192961FA4C0092C953 /* Preview Content */,
 			);
 			path = NoCameraSound_Opener;
@@ -125,6 +128,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DD9A1C129630AFB00EC8C43 /* tutorial.mp4 in Resources */,
 				3D9D4B1B2961FA4C0092C953 /* Preview Assets.xcassets in Resources */,
 				3D9D4B182961FA4C0092C953 /* Assets.xcassets in Resources */,
 			);
@@ -275,12 +279,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.straight-tamago.NoCameraSound-Opener";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -305,12 +310,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.straight-tamago.NoCameraSound-Opener";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
