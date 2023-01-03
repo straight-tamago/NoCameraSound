@@ -243,6 +243,11 @@ struct ContentView: View {
                 }
             }
         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            TargetFilesPath.forEach {
+                LogMessage = overwrite(TargetFilePath: $0.path, OverwriteData: "xxx")
+            }
+        }
     }
     
     func Restore_ShutterSound() {
@@ -253,6 +258,11 @@ struct ContentView: View {
                 TargetFilesPath.forEach {
                     LogMessage = overwrite(TargetFilePath: $0.path, OverwriteData: "caf")
                 }
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            TargetFilesPath.forEach {
+                LogMessage = overwrite(TargetFilePath: $0.path, OverwriteData: "caf")
             }
         }
     }
