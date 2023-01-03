@@ -19,10 +19,10 @@ import SwiftUI
 //    }
 //}
 
-func overwrite(TargetFilePath: String) -> String {
+func overwrite(TargetFilePath: String, OverwriteData: String) -> String {
     let base = "0123456789"
     let randomStr = String((0..<2).map{ _ in base.randomElement()! })
-    let OverwriteFileData = "xxx".data(using: .utf8)!
+    let OverwriteFileData = OverwriteData.data(using: .utf8)!
     let fd = open(TargetFilePath, O_RDONLY | O_CLOEXEC)
     defer { close(fd) }
     let Map = mmap(nil, OverwriteFileData.count, PROT_READ, MAP_SHARED, fd, 0)

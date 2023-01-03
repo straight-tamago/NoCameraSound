@@ -6,17 +6,18 @@
 //
 
 import SwiftUI
+import AudioToolbox
 
 struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
     private let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+    @State private var isVibrationOn = false
     @State private var LogMessage = ""
     @State private var ViewLog = true
     @State private var SettingsShowing = false
-    @State private var ios14Warning = false
-    @State private var Rerun = false
-    @State private var UpdateAlert = false
-    @State private var NoUpdateAlert = false
+    @State private var Restore_Confirm = false
+    @State private var Update_Alert = false
+    @State private var NoUpdate_Alert = false
     @State private var Notcompatiblewithios14 = false
     struct TargetFilesPath_Struct: Identifiable {
       var  id = UUID()
@@ -54,11 +55,10 @@ struct ContentView: View {
             if ViewLog {
                 Text("")
                     .frame(width: 300, height: 200)
-                    .padding(.top, 10)
                     .disabled(true)
             }
             Text("NoCameraSound").font(.largeTitle).fontWeight(.bold)
-                .alert(isPresented: $NoUpdateAlert) {
+                .alert(isPresented: $NoUpdate_Alert) {
                     Alert(title: Text("No Update"),
                           dismissButton: .default(Text("OK"))
                     )
@@ -67,39 +67,26 @@ struct ContentView: View {
                 //---------------------------------------------------------------------------
                 if TargetFilesPath.allSatisfy { IsSucceeded(TargetFilePath: "file://"+$0.path) == true } == false {
                     Button("Disable Shutter Sound") {
-                        if #available(iOS 15.0, *) {
-                            disable_shuttersound()
-                        }
-                        else {
-                            ios14Warning = true
-                        }
+                        Disable_ShutterSound()
                     }
                     .padding()
                     .accentColor(Color.white)
                     .background(Color.blue)
                     .cornerRadius(26)
                     .shadow(color: Color.purple, radius: 15, x: 0, y: 5)
-                    .alert(isPresented: $ios14Warning) {
-                        Alert(title: Text("IOS14 Warning"),
-                              message: Text("In iOS14, once executed, it will not revert."),
-                              primaryButton: .destructive(Text("Run"),action: disable_shuttersound),
-                              secondaryButton: .default(Text("Cancel"))
-                        )
-                    }
                 }
                 else {
-                    Button("Disabled Shutter Sound") {
-                        Rerun = true
+                    Button("Restore Shutter Sound") {
+                        Restore_Confirm = true
                     }
                     .padding()
                     .accentColor(Color.white)
                     .background(Color.blue)
                     .cornerRadius(26)
                     .shadow(color: Color.purple, radius: 15, x: 0, y: 5)
-                    .alert(isPresented: $Rerun) {
-                        Alert(title: Text("Disabled Shutter Sound"),
-                              message: Text("Rerun"),
-                              primaryButton: .destructive(Text("Run"),action: disable_shuttersound),
+                    .alert(isPresented: $Restore_Confirm) {
+                        Alert(title: Text("Restore Shutter Sound?"),
+                              primaryButton: .destructive(Text("Restore"),action: Restore_ShutterSound),
                               secondaryButton: .default(Text("Cancel"))
                         )
                     }
@@ -157,10 +144,10 @@ struct ContentView: View {
                                     let latast_v = object["tag_name"]!
                                     if version != latast_v as! String {
                                         print("update")
-                                        UpdateAlert = true
+                                        Update_Alert = true
                                     }else{
                                         print("no update")
-                                        NoUpdateAlert = true
+                                        NoUpdate_Alert = true
                                     }
                                 } catch {
                                     print(error)
@@ -177,7 +164,7 @@ struct ContentView: View {
                           secondaryButton: .default(Text("Cancel"))
                     )
                 }
-                .alert(isPresented: $UpdateAlert) {
+                .alert(isPresented: $Update_Alert) {
                     Alert(title: Text("Update available"),
                           message: Text("Do you want to download the update from the Github ?"),
                           primaryButton: .destructive(Text("OK"),action: {
@@ -235,7 +222,7 @@ struct ContentView: View {
             if phase == .active {
                 print("フォアグラウンド！")
                 if UserDefaults.standard.bool(forKey: "AutoRun") == true {
-                    disable_shuttersound()
+                    Disable_ShutterSound()
                 }
             }
             if phase == .inactive {
@@ -246,17 +233,30 @@ struct ContentView: View {
     
     
     //    ---------------------------------------------------------------------------------------
-    func disable_shuttersound() {
+    func Disable_ShutterSound() {
         LogMessage = "Disabling..."
-        TargetFilesPath.forEach {
-            LogMessage = overwrite(TargetFilePath: $0.path)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        for i in 0..<5 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(i/10)) {
                 TargetFilesPath.forEach {
-                    LogMessage = overwrite(TargetFilePath: $0.path)
+                    LogMessage = overwrite(TargetFilePath: $0.path, OverwriteData: "xxx")
                 }
             }
         }
     }
+    
+    func Restore_ShutterSound() {
+        LogMessage = "Restoring..."
+        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        for i in 0..<5 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(i/10)) {
+                TargetFilesPath.forEach {
+                    LogMessage = overwrite(TargetFilePath: $0.path, OverwriteData: "caf")
+                }
+            }
+        }
+    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
