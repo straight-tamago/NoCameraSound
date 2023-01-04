@@ -4,7 +4,7 @@ iOS 14 - 16.1.2
 
 Reboot your device to revert the changes. (iOS14❌)
 
-![0_23 2](https://user-images.githubusercontent.com/121408851/210470739-37a42f84-c9b7-4af5-bd56-faf34b3b19b1.PNG)
+<img src="{[画像URL](https://user-images.githubusercontent.com/121408851/210470739-37a42f84-c9b7-4af5-bd56-faf34b3b19b1.PNG)}" width="50%" />
 
 
 # Install
