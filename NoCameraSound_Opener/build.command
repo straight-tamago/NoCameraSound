@@ -32,7 +32,6 @@ if [ -e "$TARGET_APP/embedded.mobileprovision" ]; then
     rm -rf "$TARGET_APP/embedded.mobileprovision"
 fi
 
-ldid -S"$WORKING_LOCATION/entitlements.plist" "$TARGET_APP/$APPLICATION_NAME"
 mkdir Payload
 cp -r NoCameraSound_Opener.app Payload/NoCameraSound_Opener.app
 zip -vr NoCameraSound_Opener.ipa Payload
