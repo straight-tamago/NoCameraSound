@@ -305,6 +305,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NoCameraSound/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NoCameraSound;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = loc;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = en;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -316,7 +318,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.7;
+				MARKETING_VERSION = 5.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.straight-tamago.NoCameraSound";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -340,6 +342,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NoCameraSound/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NoCameraSound;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = loc;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = en;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -351,7 +355,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.7;
+				MARKETING_VERSION = 5.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.straight-tamago.NoCameraSound";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

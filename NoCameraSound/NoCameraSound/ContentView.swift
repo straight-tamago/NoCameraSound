@@ -17,8 +17,9 @@ struct ContentView: View {
     @State private var SettingsShowing = false
     @State private var Restore_Confirm = false
     @State private var Update_Alert = false
-    @State private var NoUpdate_Alert = false
+    @State private var Update_Available = false
     @State private var Notcompatiblewithios14 = false
+    @State private var switch_bool = false
     struct TargetFilesPath_Struct: Identifiable {
       var  id = UUID()
       let title: String
@@ -58,16 +59,12 @@ struct ContentView: View {
                     .disabled(true)
             }
             Text("NoCameraSound").font(.largeTitle).fontWeight(.bold)
-                .alert(isPresented: $NoUpdate_Alert) {
-                    Alert(title: Text("No Update"),
-                          dismissButton: .default(Text("OK"))
-                    )
-                }
             HStack {
                 //---------------------------------------------------------------------------
                 if TargetFilesPath.allSatisfy { IsSucceeded(TargetFilePath: "file://"+$0.path) == true } == false {
                     Button("Disable Shutter Sound") {
                         Disable_ShutterSound()
+                        switch_bool = true
                     }
                     .padding()
                     .accentColor(Color.white)
@@ -86,7 +83,7 @@ struct ContentView: View {
                     .shadow(color: Color.purple, radius: 15, x: 0, y: 5)
                     .alert(isPresented: $Restore_Confirm) {
                         Alert(title: Text("Restore Shutter Sound?"),
-                              primaryButton: .destructive(Text("Restore"),action: Restore_ShutterSound),
+                              primaryButton: .destructive(Text("Restore"),action: Restore_ShutterSound_SP),
                               secondaryButton: .default(Text("Cancel"))
                         )
                     }
@@ -125,6 +122,28 @@ struct ContentView: View {
                                 Notcompatiblewithios14 = true
                             }
                         },
+                        .default(Text("\(NSLocalizedString("Run in background (Status: ", comment: ""))"+String(UserDefaults.standard.bool(forKey: "Location"))+")")) {
+                            if UserDefaults.standard.bool(forKey: "Location") == true {
+                                UserDefaults.standard.set(false, forKey: "Location")
+                            }else {
+                                UserDefaults.standard.set(true, forKey: "Location")
+                            }
+                            UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+                            Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                                        exit(0)
+                                    }
+                        },
+                        .default(Text("\(NSLocalizedString("Location Indicator (Status: ", comment: ""))"+String(UserDefaults.standard.bool(forKey: "Location_Indicator"))+")")) {
+                            if UserDefaults.standard.bool(forKey: "Location_Indicator") == true {
+                                UserDefaults.standard.set(false, forKey: "Location_Indicator")
+                            }else {
+                                UserDefaults.standard.set(true, forKey: "Location_Indicator")
+                            }
+                            UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+                            Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                                        exit(0)
+                                    }
+                        },
                         .default(Text("\(NSLocalizedString("View Log (Status: ", comment: ""))"+String(UserDefaults.standard.bool(forKey: "ViewLog"))+")")) {
                             if UserDefaults.standard.bool(forKey: "ViewLog") == true {
                                 UserDefaults.standard.set(false, forKey: "ViewLog")
@@ -144,10 +163,12 @@ struct ContentView: View {
                                     let latast_v = object["tag_name"]!
                                     if version != latast_v as! String {
                                         print("update")
+                                        Update_Available = true
                                         Update_Alert = true
                                     }else{
                                         print("no update")
-                                        NoUpdate_Alert = true
+                                        Update_Available = false
+                                        Update_Alert = true
                                     }
                                 } catch {
                                     print(error)
@@ -165,15 +186,21 @@ struct ContentView: View {
                     )
                 }
                 .alert(isPresented: $Update_Alert) {
-                    Alert(title: Text("Update available"),
-                          message: Text("Do you want to download the update from the Github ?"),
-                          primaryButton: .destructive(Text("OK"),action: {
-                        if let url = URL(string: "https://github.com/straight-tamago/NoCameraSound/releases") {
-                            UIApplication.shared.open(url)
-                        }
-                    }),
-                          secondaryButton: .default(Text("Cancel"))
-                    )
+                    if Update_Available == true {
+                        return Alert(title: Text("Update available"),
+                              message: Text("Do you want to download the update from the Github ?"),
+                              primaryButton: .destructive(Text("OK"),action: {
+                            if let url = URL(string: "https://github.com/straight-tamago/NoCameraSound/releases") {
+                                UIApplication.shared.open(url)
+                            }
+                        }),
+                              secondaryButton: .default(Text("Cancel"))
+                        )
+                    }else{
+                        return Alert(title: Text("No Update"),
+                              dismissButton: .default(Text("OK"))
+                        )
+                    }
                 }
                 //---------------------------------------------------------------------------
             }
@@ -214,6 +241,9 @@ struct ContentView: View {
                 print("List refresh")
                 TargetFilesPath[0].id = UUID()
             }
+            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
+                FileSwitch_background()
+            }
         }
         .onChange(of: scenePhase) { phase in
             if phase == .background {
@@ -223,6 +253,7 @@ struct ContentView: View {
                 print("フォアグラウンド！")
                 if UserDefaults.standard.bool(forKey: "AutoRun") == true {
                     Disable_ShutterSound()
+                    switch_bool = true
                 }
             }
             if phase == .inactive {
@@ -250,6 +281,11 @@ struct ContentView: View {
         }
     }
     
+    func Restore_ShutterSound_SP() {
+        switch_bool = false
+        Restore_ShutterSound()
+    }
+    
     func Restore_ShutterSound() {
         LogMessage = "Restoring..."
         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
@@ -263,6 +299,15 @@ struct ContentView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             TargetFilesPath.forEach {
                 LogMessage = overwrite(TargetFilePath: $0.path, OverwriteData: "caf")
+            }
+        }
+    }
+    
+    func FileSwitch_background() -> (Void) {
+        print("FileSwitch_background")
+        if UserDefaults.standard.bool(forKey: "Location") == true {
+            if switch_bool == true {
+                Disable_ShutterSound()
             }
         }
     }

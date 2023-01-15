@@ -12,3 +12,10 @@
 "View Log (Status: " = "ログを表示 (状態: ";
 "Not　compatible　with　ios14" = "この機能はiOS14非対応";
 "Update Check" = "アップデート確認";
+"Update available" = "最新版が利用可能";
+"Do you want to download the update from the Github ?" = "Githubからダウンロード";
+"OK" = "はい";
+"Cancel" = "キャンセル";
+"No Update" = "アップデートはありません";
+"Run in background (Status: " = "バックグラウンド実行で状態維持 (状態: ";
+"Location Indicator (Status: " = "バックグラウンド起動中はステータスバーに表示 (状態: ";
