@@ -2,6 +2,9 @@
 
 iOS 14.0-15.7.1 & 16.0-16.1.2
 
+これはもう使用するべきではありません。
+https://ichitaso.com/iphone/how-to-silence-the-shutter-sound-in-silent-mode/
+
 Reboot your device to revert the changes. (iOS14❌)
 
 <p>
