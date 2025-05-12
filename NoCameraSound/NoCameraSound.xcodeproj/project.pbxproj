@@ -14,6 +14,8 @@
 		3D16394B295C4ABF006D31D8 /* vm_unaligned_copy_switch_race.c in Sources */ = {isa = PBXBuildFile; fileRef = 3D16394A295C4ABF006D31D8 /* vm_unaligned_copy_switch_race.c */; };
 		3D163953295C7029006D31D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D163955295C7029006D31D8 /* Localizable.strings */; };
 		3DD9A1B92962CD1F00EC8C43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DD9A1B82962CD1F00EC8C43 /* Assets.xcassets */; };
+		3DE98FEA2DD29612001EBE93 /* ContentView+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE98FE92DD29612001EBE93 /* ContentView+Actions.swift */; };
+		3DE98FEC2DD29628001EBE93 /* SoundFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE98FEB2DD29628001EBE93 /* SoundFile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		3D163954295C7029006D31D8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3D2342AC295FFFE600A6E40D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3DD9A1B82962CD1F00EC8C43 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3DE98FE92DD29612001EBE93 /* ContentView+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView+Actions.swift"; sourceTree = "<group>"; };
+		3DE98FEB2DD29628001EBE93 /* SoundFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,8 @@
 				3D163907295B51D8006D31D8 /* NoCameraSoundApp.swift */,
 				3D163949295C4ABA006D31D8 /* vm_unaligned_copy_switch_race.h */,
 				3D16394A295C4ABF006D31D8 /* vm_unaligned_copy_switch_race.c */,
+				3DE98FE92DD29612001EBE93 /* ContentView+Actions.swift */,
+				3DE98FEB2DD29628001EBE93 /* SoundFile.swift */,
 				3D163909295B51D8006D31D8 /* ContentView.swift */,
 				3D163917295B520E006D31D8 /* NoCameraSound.swift */,
 				3D163919295B5227006D31D8 /* NoCameraSound-Bridging-Header.h */,
@@ -156,6 +162,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DE98FEA2DD29612001EBE93 /* ContentView+Actions.swift in Sources */,
+				3DE98FEC2DD29628001EBE93 /* SoundFile.swift in Sources */,
 				3D163918295B520E006D31D8 /* NoCameraSound.swift in Sources */,
 				3D16390A295B51D8006D31D8 /* ContentView.swift in Sources */,
 				3D16394B295C4ABF006D31D8 /* vm_unaligned_copy_switch_race.c in Sources */,
@@ -301,6 +309,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NoCameraSound/Preview Content\"";
+				DEVELOPMENT_TEAM = WQL5MJWHM6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NoCameraSound/Info.plist;
@@ -338,6 +347,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NoCameraSound/Preview Content\"";
+				DEVELOPMENT_TEAM = WQL5MJWHM6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NoCameraSound/Info.plist;

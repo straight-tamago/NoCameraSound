@@ -10,7 +10,6 @@ import CoreLocation
 
 @main
 struct NoCameraSoundApp: App {
-    //AppDelegateを設定できるようにする
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {
@@ -23,7 +22,6 @@ struct NoCameraSoundApp: App {
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
     var locationManager: CLLocationManager!
 
-    // アプリの起動時
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions:
     [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
@@ -41,8 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             locationManager.showsBackgroundLocationIndicator = UserDefaults.standard.bool(forKey: "Location_Indicator")
             locationManager.distanceFilter = 1
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.allowsBackgroundLocationUpdates = true //バックグラウンド処理を可能にする
-            locationManager.pausesLocationUpdatesAutomatically = false //ポーズしても位置取得を続ける
+            locationManager.allowsBackgroundLocationUpdates = true 
+            locationManager.pausesLocationUpdatesAutomatically = false
             locationManager.delegate = self
             
             locationManager.startMonitoringSignificantLocationChanges()

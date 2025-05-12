@@ -8,23 +8,23 @@
 import UIKit
 import SwiftUI
 
-func overwrite(TargetFilePath: String, OverwriteData: String) -> String {
+func overwrite(targetFilePath: String, overwriteData: String) -> String {
     let base = "0123456789"
     let randomStr = String((0..<2).map{ _ in base.randomElement()! })
-    let OverwriteFileData = OverwriteData.data(using: .utf8)!
-    let fd = open(TargetFilePath, O_RDONLY | O_CLOEXEC)
+    let overwriteFileData = overwriteData.data(using: .utf8)!
+    let fd = open(targetFilePath, O_RDONLY | O_CLOEXEC)
     defer { close(fd) }
-    let Map = mmap(nil, OverwriteFileData.count, PROT_READ, MAP_SHARED, fd, 0)
-    if Map == MAP_FAILED {
+    let map = mmap(nil, overwriteFileData.count, PROT_READ, MAP_SHARED, fd, 0)
+    if map == MAP_FAILED {
         print("mmap Error")
         return "mmap Error - "+randomStr
     }
-    guard mlock(Map, OverwriteFileData.count) == 0 else {
+    guard mlock(map, overwriteFileData.count) == 0 else {
         print("mlock Error")
         return "mlock Error - "+randomStr
     }
-    for chunkOff in stride(from: 0, to: OverwriteFileData.count, by: 0x4000) {
-        let dataChunk = OverwriteFileData[chunkOff..<min(OverwriteFileData.count, chunkOff + 0x3fff)]
+    for chunkOff in stride(from: 0, to: overwriteFileData.count, by: 0x4000) {
+        let dataChunk = overwriteFileData[chunkOff..<min(overwriteFileData.count, chunkOff + 0x3fff)]
         var overwroteOne = false
         for _ in 0..<2 {
             let overwriteSucceeded = dataChunk.withUnsafeBytes { dataChunkBytes in
@@ -46,12 +46,12 @@ func overwrite(TargetFilePath: String, OverwriteData: String) -> String {
     return "Success - "+randomStr
 }
 
-func IsSucceeded(TargetFilePath: String) -> Bool {
-    guard let data = try? Data(contentsOf: URL(string: TargetFilePath)!) else {
+func isSucceeded(targetFilePath: String) -> Bool {
+    guard let data = try? Data(contentsOf: URL(string: targetFilePath)!) else {
         return false
     }
-    var databinary = data[0..<3].map { String(format: "%02X", $0)}
-    var dataString = databinary.joined()
+    var dataBinary = data[0..<3].map { String(format: "%02X", $0)}
+    var dataString = dataBinary.joined()
     print(dataString)
     if dataString != "787878" {
         return false
